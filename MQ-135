@@ -1,0 +1,42 @@
+int sensorValue;
+int digitalValue;
+#define Sober 86   // Define max value that we consider sober
+#define Drunk 480   // Define min value that we consider drunk
+
+void setup()
+{
+  Serial.begin(9600); // sets the serial port to 9600
+  pinMode(13, OUTPUT);
+  pinMode(2, INPUT);
+}
+
+void loop()
+{
+  sensorValue = analogRead(0); // read analog input pin 0
+  digitalValue = digitalRead(2);
+  if (sensorValue > 200)
+  {
+    digitalWrite(13, HIGH);
+  }
+  else
+    digitalWrite(13, LOW);
+  Serial.println(sensorValue, DEC); // prints the value read
+  Serial.println(digitalValue, DEC);
+  delay(1000); // wait 100ms for next reading
+  
+// Determine the status
+
+  sensorValue = analogRead(0); // read analog input pin 0
+
+  Serial.print("Sensor Value: ");
+  Serial.print(sensorValue);
+  
+  // Determine the status
+  if (sensorValue < 200 ) {
+    Serial.println("  |  Status:   trezven");
+  } else if (sensorValue > 200 && sensorValue < 480) {
+    Serial.println("  |  Status: piqnica");
+  } else (sensorValue > 480 && sensorValue < 700000000 ) 
+    //;Serial.println("  |  Status: DRUNK");
+ ; }
+  
